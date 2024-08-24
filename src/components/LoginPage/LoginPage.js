@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
+import {useNavigate} from "react-router-dom";
 
 const LoginPage = () => {
     const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const navigate=useNavigate();
 
     const handleLogin = async () => {
         const response = await fetch('/users/login', {
@@ -18,18 +21,21 @@ const LoginPage = () => {
 
         });
 
+
         if (response.ok) {
-            const message = await response.text();
-            alert(message);
+            setMessage("Giriş Başarılı");
+            const user = await response.json();
+            navigate('/userPage',{state:{user}});
             // Hesap sayfasına yönlendirin
         } else {
-            alert('Login failed');
+            setMessage("Eposta veya şifre hatalı!!!");
         }
     };
 
     return (
         <div className="container">
             <h1>Login</h1>
+            {message && <p className="error-message">{message}</p> }
             <input type="email" placeholder="Email" value={email} onChange={(e) => setemail(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button onClick={handleLogin}>Login</button>

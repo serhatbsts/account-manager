@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CreateUserPage.css';
+import {useNavigate} from "react-router-dom";
 
 const CreateUserPage = () => {
     const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ const CreateUserPage = () => {
         password: false,
         confirmPassword: false
     });
+    const navigate=useNavigate();
 
     const handleCreateAccount = async () => {
         let hasError = false;
@@ -77,6 +79,8 @@ const CreateUserPage = () => {
             });
 
             if (response.ok) {
+                const user=await response.json();
+                navigate('/userPage',{state:{user}})
                 setSuccess(true);
                 setError(null);
             } else {

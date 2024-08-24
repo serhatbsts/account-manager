@@ -1,0 +1,47 @@
+.userPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.userPage h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.userPage p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.editButton, .deleteButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.editButton {
+    background-color: #007bff;
+    color: white;
+}
+
+.deleteButton {
+    background-color: #dc3545;
+    color: white;
+    margin-left: 10px;
+}
+
+.editButton:hover {
+    background-color: #0056b3;
+}
+
+.deleteButton:hover {
+    background-color: #c82333;
+}
