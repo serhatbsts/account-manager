@@ -9,28 +9,33 @@ const LoginPage = () => {
     const navigate=useNavigate();
 
     const handleLogin = async () => {
-        const response = await fetch('/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify({
-                email:email,
-                password:parseInt(password,10)
-            })
+        try {
+            const response = await fetch('/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: parseInt(password, 10)
+                })
+            });
 
-        });
-
-
-        if (response.ok) {
-            setMessage("Giriş Başarılı");
-            const user = await response.json();
-            navigate('/userPage',{state:{user}});
-            // Hesap sayfasına yönlendirin
-        } else {
-            setMessage("Eposta veya şifre hatalı!!!");
+            if (response.ok) {
+                const data = await response.json(); // Yanıtı bir kez oku
+                localStorage.setItem('userId', data.id);
+                setMessage("Giriş Başarılı");
+                navigate('/userPage', { state: { user: data } }); // Kullanıcı verilerini yönlendir
+            } else {
+                const errorData = await response.json(); // Hata durumunda yanıtı oku
+                setMessage(errorData.message || "Eposta veya şifre hatalı!!!");
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setMessage("Bir hata oluştu. Lütfen tekrar deneyin.");
         }
     };
+
 
     return (
         <div className="container">

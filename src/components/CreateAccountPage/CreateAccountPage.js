@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 
-const CreateAccountPage = () => {
+const CreateAccountPage = ({ userId }) => {
     const [balance, setBalance] = useState('');
-
 
     const handleCreateAccount = async () => {
         try {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                alert('User ID is not available');
+                return;
+            }
             const response = await fetch(`/user_accounts`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ balance }),
+                body: JSON.stringify({ userId, balance }),
             });
 
             if (response.ok) {
                 alert('Account created successfully');
-                // Başarılı olursa yönlendirme ekleyebilirsiniz
             } else {
                 alert('Failed to create account');
             }
@@ -24,6 +27,7 @@ const CreateAccountPage = () => {
             alert('An error occurred. Please try again.');
         }
     };
+
 
     return (
         <div className="createAccountPage">
