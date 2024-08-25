@@ -9,7 +9,13 @@ const DepositWithdrawPage = () => {
     const [amount, setAmount] = useState('');
 
     const handleTransaction = async () => {
-        const endpoint = type === 'deposit' ? `/user_accounts/deposit/${user.id}` : `/user_accounts/withdrawal/${user.id}`;
+        const accountId = localStorage.getItem('accountId');
+        if (!accountId) {
+            alert("Account information is missing.");
+            return;
+        }
+
+        const endpoint = type === 'deposit' ? `/user_accounts/deposit/${accountId}` : `/user_accounts/withdrawal/${accountId}`;
         const response = await fetch(endpoint, {
             method: 'PUT',
             headers: {
@@ -22,10 +28,11 @@ const DepositWithdrawPage = () => {
             alert(`${type.charAt(0).toUpperCase() + type.slice(1)} successful`);
             navigate('/userPage', { state: { user } });
         } else {
-            const responseData = await response.json();
-            alert(responseData.message || `Failed to ${type}`);
+            const responseData = await response.json(); // Get error message in JSON format
+            alert(responseData.message || `Failed to ${type}`); // Show error message with alert
         }
     };
+
 
     return (
         <div className="depositWithdrawPage">

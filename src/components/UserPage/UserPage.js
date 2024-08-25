@@ -5,7 +5,7 @@ import './UserPage.css';
 const UserPage = () => {
     const location = useLocation();
     const navigate=useNavigate();
-    const { user } = location.state || {}; // Kullanıcı bilgisini konum durumundan al
+    const { user } = location.state || {}; // Get user information from location status
     const [account,setAccount]=useState(null);
 
     useEffect(() => {

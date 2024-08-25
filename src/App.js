@@ -22,7 +22,8 @@ function App() {
              <Route path="/userPage" element={<UserPage/>}/>
              <Route path="/editPage" element={<EditPage/>}/>
                  <Route path="/createAccount" element={<CreateAccountPage />} />
-                 <Route path="/depositWithdrawPage" element={<DepositWithdrawPage/>}/>
+                 <Route path="/depositWithdraw" element={<DepositWithdrawPage/>}/>
+                 <Route path="/depositWithdraw" element={<DepositWithdrawPage/>}/>
              </Routes>
          </Router>
      </div>

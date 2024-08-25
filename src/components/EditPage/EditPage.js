@@ -25,7 +25,7 @@ const EditPage=()=>{
             navigate('/userPage', { state: { user: { ...user, email,name, surName,  } } });
         }else {
             const responseData = await response.json();
-            console.log(responseData);  // Hata mesajını konsola yazdır
+            console.log(responseData);  // Print error message to console
             alert(responseData.message || 'Failed to update user');
         }
     };

@@ -22,17 +22,17 @@ const LoginPage = () => {
             });
 
             if (response.ok) {
-                const data = await response.json(); // Yanıtı bir kez oku
+                const data = await response.json();
                 localStorage.setItem('userId', data.id);
                 setMessage("Giriş Başarılı");
-                navigate('/userPage', { state: { user: data } }); // Kullanıcı verilerini yönlendir
+                navigate('/userPage', { state: { user: data } }); // Redirect user data
             } else {
-                const errorData = await response.json(); // Hata durumunda yanıtı oku
-                setMessage(errorData.message || "Eposta veya şifre hatalı!!!");
+                const errorData = await response.json(); // Read response on error
+                setMessage(errorData.message || "Email or password is incorrect!!!");
             }
         } catch (error) {
             console.error('Error:', error);
-            setMessage("Bir hata oluştu. Lütfen tekrar deneyin.");
+            setMessage("An error occurred. Please try again.");
         }
     };
 

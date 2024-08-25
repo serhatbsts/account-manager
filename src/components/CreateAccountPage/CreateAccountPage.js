@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './CreateAccountPage.css';
+
 
 const CreateAccountPage = ({ userId }) => {
     const [balance, setBalance] = useState('');
@@ -6,10 +8,6 @@ const CreateAccountPage = ({ userId }) => {
     const handleCreateAccount = async () => {
         try {
             const userId = localStorage.getItem('userId');
-            if (!userId) {
-                alert('User ID is not available');
-                return;
-            }
             const response = await fetch(`/user_accounts`, {
                 method: 'POST',
                 headers: {
@@ -19,6 +17,9 @@ const CreateAccountPage = ({ userId }) => {
             });
 
             if (response.ok) {
+                const account = await response.json(); // Convert the response to JSON format after account creation
+                localStorage.setItem('accountId', account.id);
+                console.log(localStorage.getItem('accountId'));// save accountId
                 alert('Account created successfully');
             } else {
                 alert('Failed to create account');
