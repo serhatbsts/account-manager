@@ -1,0 +1,33 @@
+.createAccountPage {
+    padding: 20px;
+}
+
+.createAccountPage h2 {
+    margin-bottom: 20px;
+}
+
+.createAccountPage form {
+    display: flex;
+    flex-direction: column;
+}
+
+.createAccountPage label {
+    margin-bottom: 10px;
+}
+
+.createAccountPage input {
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.createAccountPage button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.createAccountPage button:hover {
+    background-color: #0056b3;
+}

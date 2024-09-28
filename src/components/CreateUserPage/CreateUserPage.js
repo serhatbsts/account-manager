@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CreateUserPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const CreateUserPage = () => {
     const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ const CreateUserPage = () => {
         password: false,
         confirmPassword: false
     });
+    const navigate = useNavigate();
 
     const handleCreateAccount = async () => {
         let hasError = false;
@@ -77,8 +79,10 @@ const CreateUserPage = () => {
             });
 
             if (response.ok) {
+                alert("You are directed to the account created login page.");
                 setSuccess(true);
                 setError(null);
+                navigate('/login'); // Redirect to login page after successful account creation
             } else {
                 const responseData = await response.json();
                 setError(responseData.message || 'Failed to create account');

@@ -4,7 +4,11 @@ import Appbar from "./components/Appbar";
 import LoginPage from "./components/LoginPage/LoginPage";
 import HomePage from "./components/HomePage/HomePage";
 import CreateUserPage from "./components/CreateUserPage/CreateUserPage";
-import AccountPage from "./components/AccountPage/AccountPage";
+import UserPage from "./components/UserPage/UserPage";
+import EditPage from "./components/EditPage/EditPage";
+import CreateAccountPage from './components/CreateAccountPage/CreateAccountPage.js';
+import DepositWithdrawPage from "./components/DepositWithdrawPage/DepositWithdrawPage";
+
 
 function App() {
   return (
@@ -15,7 +19,11 @@ function App() {
              <Route path="/" element={<HomePage />} />
              <Route path="/login" element={<LoginPage/>}/>
              <Route path="/createUser" element={<CreateUserPage/>}/>
-             <Route path="/userPage" element={<AccountPage/>}/>
+             <Route path="/userPage" element={<UserPage/>}/>
+             <Route path="/editPage" element={<EditPage/>}/>
+                 <Route path="/createAccount" element={<CreateAccountPage />} />
+                 <Route path="/depositWithdraw" element={<DepositWithdrawPage/>}/>
+                 <Route path="/depositWithdraw" element={<DepositWithdrawPage/>}/>
              </Routes>
          </Router>
      </div>
