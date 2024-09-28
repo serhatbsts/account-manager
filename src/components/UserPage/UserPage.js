@@ -29,6 +29,29 @@ const UserPage = () => {
     const handleWithdrawal=()=>{
       navigate('/depositWithdraw',{state:{user,type:'withdrawal'}});
     };
+    const handleDeleteAccount = async () => {
+        if (!account || !account.id) {
+            alert('Account not found');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/user_accounts/${account.id}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert('Account deleted successfully');
+                setAccount(null); // Hesabı sıfırla
+            } else {
+                const responseData = await response.json();
+                alert(responseData.message || 'Failed to delete the account');
+            }
+        } catch (error) {
+            alert('An error occurred. Please try again.');
+        }
+    };
+
     const handleDeleteUser = async () => {
         if (!user || !user.id) {
             alert('User ID is not available');
@@ -52,6 +75,12 @@ const UserPage = () => {
         }
     };
 
+    const handleLogout = () => {
+        // LocalStorage veya SessionStorage'daki kullanıcı oturum bilgilerini temizle
+        localStorage.removeItem('user'); // Örneğin burada token veya kullanıcı bilgisini kaldırıyoruz
+        navigate('/'); // Ana sayfaya yönlendir
+    };
+
 
     if (!user) {
         return <div className="userPage"><p>No user data available</p></div>;
@@ -70,12 +99,14 @@ const UserPage = () => {
             <div className="accountActions">
                 <button className="depositButton" onClick={handleDeposit}>Deposit</button>
                 <button className="withdrawalButton" onClick={handleWithdrawal}>Withdraw</button>
+                <button className="deleteAccountButton" onClick={handleDeleteAccount}>Delete Account</button>
             </div>
         ) : (
             <button className="createAccountButton" onClick={handleCreateAccount}>Create Account</button>
         )}
             <button className="editButton" onClick={handleEdit}>Edit</button>
             <button className="deleteButton" onClick={handleDeleteUser}>Delete</button>
+            <button className="logoutButton" onClick={handleLogout}>Logout</button> {/* Çıkış Yap Butonu */}
         </div>
     );
 };
